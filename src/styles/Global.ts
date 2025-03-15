@@ -15,5 +15,19 @@ body{
 
 }
 
+body * {
+     font-family: "Inter", sans-serif;
+}
+
+label{
+    display: block;
+    color: ${Colors.fontColorWhite};
+    margin-bottom:8px  !important;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+    border: 0 solid #e5e7eb;
+}
 
 `;
