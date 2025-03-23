@@ -11,7 +11,7 @@ export const Section = styled.section`
   padding-inline: 25px;
 `;
 
-export const FormRegister = styled.form`
+export const FormLogin = styled.form`
   max-width: 28.13rem;
   width: 100%;
   background-color: ${Colors.JetBlack};
