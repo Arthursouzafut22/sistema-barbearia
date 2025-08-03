@@ -9,17 +9,15 @@ import { useForm } from "react-hook-form";
 import { IForm } from "./types";
 import { Schema } from "./Schema/Schema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useFetchRegister } from "../../hooks/useFetchRegister";
 
 const Register = () => {
   const [password, setPassword] = useState(false);
+  const { registerSubmit, mensagem, sucess } = useFetchRegister();
   const [confirmPassword, setConfirmPassword] = useState(false);
   const { register, handleSubmit } = useForm<IForm>({
     resolver: yupResolver(Schema),
   });
-
-  const registerSubmit = (data: IForm) => {
-    console.log(data);
-  };
 
   return (
     <S.Section>
@@ -70,6 +68,18 @@ const Register = () => {
             onClick={() => setConfirmPassword((p) => !p)}
           />
         </fieldset>
+        {mensagem?.length > 0 && (
+          <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>
+            {mensagem}
+          </p>
+        )}
+        {sucess?.length > 0 && (
+          <p
+            style={{ color: "#4caf50", fontSize: "14px", textAlign: "center" }}
+          >
+            {sucess}
+          </p>
+        )}
         <Button marginTop={"10px"} text={"Entrar"} />
         <p className={"conta"}>
           Já possui uma conta? <Link to={"/login"}>Entrar</Link>

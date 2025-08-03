@@ -20,8 +20,25 @@ const Login = () => {
     resolver: yupResolver(Schema),
   });
 
-  const loginSubmit = (data: ILogin) => {
-    console.log(data);
+  const loginSubmit = async (data: ILogin) => {
+
+    try {
+      const resposta = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (resposta.ok) {
+        console.log("Login efetuado com sucesso!");
+      }
+
+      const json = await resposta.json();
+      console.log(json);
+
+      return json;
+    } catch (erro) {
+      console.log("Erro ao fazer login", erro);
+    }
   };
 
   return (
