@@ -1,11 +1,14 @@
-import { useContext, createContext, PropsWithChildren, useState } from "react";
+import {
+  useContext,
+  createContext,
+  PropsWithChildren,
+  useState,
+  useEffect,
+} from "react";
+import { Ilogin, Iuser } from "./types";
+import { URL } from "../services/urls";
 
-type userProps = {
-  id: number;
-  nome: string;
-};
-
-const ContextLogin = createContext<userProps | null>({} as userProps);
+const ContextLogin = createContext<Ilogin | null>({} as Ilogin);
 
 export const AuthLogin = () => {
   const context = useContext(ContextLogin);
@@ -14,10 +17,44 @@ export const AuthLogin = () => {
   return context;
 };
 
-const useContextLogin = ({ children }: PropsWithChildren) => {
-  const [token, setToken] = useState("");
+export const UseContextLogin = ({ children }: PropsWithChildren) => {
+  const [id] = useState(() => {
+    const getId = localStorage.getItem("id");
+    return getId ? JSON.parse(getId) : null;
+  });
+  const [token] = useState(() => {
+    const getToken = localStorage.getItem("token");
+    return getToken ? JSON.parse(getToken) : null;
+  });
+  const [user, setUser] = useState<Iuser | null>(null);
 
-  return <ContextLogin.Provider value={null}>{children}</ContextLogin.Provider>;
+  useEffect(() => {
+    if (id === null || token === null) return;
+
+    async function getUser() {
+      try {
+        const response = await fetch(URL + `/user/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-type": "Application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const json = await response.json();
+        setUser({
+          id: json.rows[0].id,
+          nome: json.rows[0].nome,
+          email: json.rows[0].email,
+        });
+      } catch (erro) {
+        console.error(erro);
+      }
+    }
+    getUser();
+  }, [id, token]);
+
+  return (
+    <ContextLogin.Provider value={{ user }}>{children}</ContextLogin.Provider>
+  );
 };
-
-export default useContextLogin;

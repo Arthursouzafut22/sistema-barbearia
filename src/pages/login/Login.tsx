@@ -8,38 +8,15 @@ import { useForm } from "react-hook-form";
 import { Schema } from "./Schema/Schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-
-interface ILogin {
-  ["E-mail"]: string;
-  ["Senha"]: string;
-}
+import { ILogin } from "./types";
+import { useFetchLogin } from "../../hooks/useFetchLogin";
 
 const Login = () => {
   const [password, setPassword] = useState(false);
+  const { loginSubmit, mensagem } = useFetchLogin();
   const { register, handleSubmit } = useForm<ILogin>({
     resolver: yupResolver(Schema),
   });
-
-  const loginSubmit = async (data: ILogin) => {
-
-    try {
-      const resposta = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      });
-      if (resposta.ok) {
-        console.log("Login efetuado com sucesso!");
-      }
-
-      const json = await resposta.json();
-      console.log(json);
-
-      return json;
-    } catch (erro) {
-      console.log("Erro ao fazer login", erro);
-    }
-  };
 
   return (
     <S.Section>
@@ -70,8 +47,14 @@ const Login = () => {
             onClick={() => setPassword((p) => !p)}
           />
         </fieldset>
-
-        <Button marginTop={"10px"} text={"Entrar"} />
+        {mensagem.length > 0 && (
+          <p
+            style={{ color: "#4caf50", fontSize: "14px", textAlign: "center" }}
+          >
+            {mensagem}
+          </p>
+        )}
+        <Button marginTop={"10px"}>Entrar</Button>
         <p className={"conta"}>
           Ainda não possui uma conta? <Link to={"/register"}>Registre-se</Link>
         </p>

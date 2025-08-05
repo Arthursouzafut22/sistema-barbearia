@@ -13,7 +13,7 @@ import { useFetchRegister } from "../../hooks/useFetchRegister";
 
 const Register = () => {
   const [password, setPassword] = useState(false);
-  const { registerSubmit, mensagem, sucess } = useFetchRegister();
+  const { registerSubmit, mensagem, sucess, spinner } = useFetchRegister();
   const [confirmPassword, setConfirmPassword] = useState(false);
   const { register, handleSubmit } = useForm<IForm>({
     resolver: yupResolver(Schema),
@@ -80,7 +80,9 @@ const Register = () => {
             {sucess}
           </p>
         )}
-        <Button marginTop={"10px"} text={"Entrar"} />
+        <Button marginTop={"10px"}>
+          {spinner ? "Carregando..." : "Criar conta"}
+        </Button>
         <p className={"conta"}>
           Já possui uma conta? <Link to={"/login"}>Entrar</Link>
         </p>
