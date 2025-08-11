@@ -12,7 +12,8 @@ export default function Header() {
     <S.Header>
       <S.Nav>
         <Link to={"/"} className="link-logo">
-          <span style={{ color: Colors.colorButton }}>Barber</span> Vip
+          <span style={{ color: Colors.colorButton }}>Barber</span>{" "}
+          <span style={{ color: "#551A8B" }}>Vip</span>
         </Link>
         <S.BoxNav>
           <S.NavLink to={"/agendar"}>Agendar {mobile ? "" : "agora"}</S.NavLink>
