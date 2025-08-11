@@ -8,7 +8,7 @@ import Header from "../components/Header/Header";
 const RoutesProvider = () => {
   return (
     <BrowserRouter>
-    <Header/>
+      <Header />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

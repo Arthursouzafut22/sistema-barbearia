@@ -11,7 +11,7 @@ export const BoxBanner = styled.div<{ mobile: boolean }>`
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: ${({ mobile }) => (mobile ? "70vh" : "87vh")};
+  height: ${({ mobile }) => (mobile ? "70vh" : "88vh")};
   display: flex;
   align-items: center;
   justify-content: center;

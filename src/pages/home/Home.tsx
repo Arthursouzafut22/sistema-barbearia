@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import useMedia from "../../hooks/useMedia";
 import * as S from "./style";
 import { MdDateRange } from "react-icons/md";
+import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs ";
 
 export default function Home() {
   const { mobile } = useMedia("(max-width:767px)");
@@ -10,7 +11,7 @@ export default function Home() {
   return (
     <S.Main>
       <S.BoxBanner mobile={mobile}>
-        <div style={{padding: '10px'}}>
+        <div style={{ padding: "10px" }}>
           <div className="box">
             <h1>
               Estilo e <span style={{ color: "" }}>Sofistifação</span>
@@ -25,6 +26,7 @@ export default function Home() {
           </div>
         </div>
       </S.BoxBanner>
+      <WhyChooseUs />
     </S.Main>
   );
 }

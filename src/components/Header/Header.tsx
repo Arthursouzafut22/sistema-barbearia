@@ -16,7 +16,9 @@ export default function Header() {
           <span style={{ color: "#551A8B" }}>Vip</span>
         </Link>
         <S.BoxNav>
+
           <S.NavLink to={"/agendar"}>Agendar {mobile ? "" : "agora"}</S.NavLink>
+          <S.NavLink2 to={"/serviços"}>Serviços</S.NavLink2>
           <button onClick={() => navigate("/perfil")}>
             <FaRegUserCircle fontSize={28} />
           </button>

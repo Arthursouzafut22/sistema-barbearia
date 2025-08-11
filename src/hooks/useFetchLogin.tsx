@@ -30,7 +30,6 @@ export const useFetchLogin = () => {
       setMensagem(json?.mensagem);
       setSpinner(false);
       delayNavigation("/");
-      return json;
     } catch (erro) {
       console.log("Erro ao fazer login", erro);
     }

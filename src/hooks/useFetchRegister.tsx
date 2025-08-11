@@ -30,10 +30,8 @@ export const useFetchRegister = () => {
       setSucess(json.sucesso);
       setSpinner(false);
       delayNavigation("/login");
-
-      return json;
     } catch (erro) {
-      console.error("Error ao enviar", erro);
+      console.error("Error ao cadastrar", erro);
     }
   };
 

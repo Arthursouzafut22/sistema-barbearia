@@ -60,3 +60,10 @@ export const NavLink = styled(Link)`
     font-size: 14px;
   }
 `;
+export const NavLink2 = styled(Link)`
+  display: block;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #ffffff;
+  padding: 6px 15px;
+`;
