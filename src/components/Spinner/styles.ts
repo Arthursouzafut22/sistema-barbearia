@@ -1,42 +1,40 @@
 import styled from "styled-components";
 
-export const Spinner = styled.div`
-  width: 100px;
-  height: 20px;
-  line-height: 50px;
-  text-align: center;
+export const Spinner = styled.svg`
+    width: 1.35em;
+    transform-origin: center;
+    animation: rotate4 2s linear infinite;
+  
 
-  span {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background: white;
-    border-radius: 50px;
-    animation: up-down6 0.5s ease-in infinite alternate;
+  .loader {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 10;
+    stroke-dasharray: 2, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: dash4 1.5s ease-in-out infinite;
   }
 
-  .dois {
-    background: white;
-    animation-delay: 0.16s;
+  @keyframes rotate4 {
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
-  .tres {
-    background: white;
-    animation-delay: 0.32s;
-  }
-
-  .quatro {
-    background: white;
-    animation-delay: 0.48s;
-  }
-
-  @keyframes up-down6 {
+  @keyframes dash4 {
     0% {
-      transform: translateY(-10px);
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+
+    50% {
+      stroke-dasharray: 90, 200;
+      stroke-dashoffset: -35px;
     }
 
     100% {
-      transform: translateY(10px);
+      stroke-dashoffset: -125px;
     }
   }
 `;

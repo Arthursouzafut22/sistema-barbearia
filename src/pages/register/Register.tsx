@@ -10,6 +10,7 @@ import { IForm } from "./types";
 import { Schema } from "./Schema/Schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useFetchRegister } from "../../hooks/useFetchRegister";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 const Register = () => {
   const [password, setPassword] = useState(false);
@@ -68,7 +69,7 @@ const Register = () => {
             onClick={() => setConfirmPassword((p) => !p)}
           />
         </fieldset>
-        {mensagem?.length > 0 && (
+        {mensagem?.length > 0 &&  (
           <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>
             {mensagem}
           </p>
@@ -81,7 +82,7 @@ const Register = () => {
           </p>
         )}
         <Button marginTop={"10px"}>
-          {spinner ? "Carregando..." : "Criar conta"}
+          {spinner ? <Spinner/> : "Criar conta"}
         </Button>
         <p className={"conta"}>
           Já possui uma conta? <Link to={"/login"}>Entrar</Link>

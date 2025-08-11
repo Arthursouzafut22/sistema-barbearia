@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IForm } from "../pages/register/types";
 import { URL } from "../services/urls";
-import { useNavigate } from "react-router-dom";
+import { useDelayNavigation } from "./useDelayNavigation";
 
 interface Iregister {
   mensagem: string;
@@ -11,8 +11,8 @@ interface Iregister {
 export const useFetchRegister = () => {
   const [mensagem, setMensagem] = useState("");
   const [sucess, setSucess] = useState("");
-  const [spinner, setSpinner] = useState(true);
-  const navigate = useNavigate();
+  const [spinner, setSpinner] = useState(false);
+  const { delayNavigation } = useDelayNavigation();
 
   const registerSubmit = async (data: IForm) => {
     try {
@@ -29,10 +29,7 @@ export const useFetchRegister = () => {
       setMensagem(json.mensagem);
       setSucess(json.sucesso);
       setSpinner(false);
-
-      if (json.sucesso.length !== 0) {
-        navigate("/login");
-      }
+      delayNavigation("/login");
 
       return json;
     } catch (erro) {

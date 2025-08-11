@@ -10,10 +10,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { ILogin } from "./types";
 import { useFetchLogin } from "../../hooks/useFetchLogin";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 const Login = () => {
   const [password, setPassword] = useState(false);
-  const { loginSubmit, mensagem } = useFetchLogin();
+  const { loginSubmit, mensagem, spinner } = useFetchLogin();
   const { register, handleSubmit } = useForm<ILogin>({
     resolver: yupResolver(Schema),
   });
@@ -54,7 +55,7 @@ const Login = () => {
             {mensagem}
           </p>
         )}
-        <Button marginTop={"10px"}>Entrar</Button>
+        <Button marginTop={"10px"}>{spinner ? <Spinner /> : "Entrar"}</Button>
         <p className={"conta"}>
           Ainda não possui uma conta? <Link to={"/register"}>Registre-se</Link>
         </p>

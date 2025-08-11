@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ILogin } from "../pages/login/types";
 import { URL } from "../services/urls";
+import { useDelayNavigation } from "./useDelayNavigation";
 
 interface Ilogin {
   id: number;
@@ -10,9 +11,12 @@ interface Ilogin {
 
 export const useFetchLogin = () => {
   const [mensagem, setMensagem] = useState<string>("");
+  const [spinner, setSpinner] = useState(false);
+  const { delayNavigation } = useDelayNavigation();
 
   const loginSubmit = async (data: ILogin) => {
     try {
+      setSpinner(true);
       const resposta = await fetch(URL + "/login", {
         method: "POST",
         body: JSON.stringify(data),
@@ -24,6 +28,8 @@ export const useFetchLogin = () => {
       localStorage.setItem("id", JSON.stringify(json.id));
       localStorage.setItem("token", JSON.stringify(json.token));
       setMensagem(json?.mensagem);
+      setSpinner(false);
+      delayNavigation("/");
       return json;
     } catch (erro) {
       console.log("Erro ao fazer login", erro);
@@ -33,5 +39,6 @@ export const useFetchLogin = () => {
   return {
     loginSubmit,
     mensagem,
+    spinner,
   };
 };
