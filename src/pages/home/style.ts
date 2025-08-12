@@ -24,7 +24,7 @@ export const BoxBanner = styled.div<{ mobile: boolean }>`
     gap: 15px;
 
     h1 {
-      color: #ffffff;
+      color: ${Colors.fontColorWhite};
       font-size: 40px;
       text-align: center;
     }
@@ -32,7 +32,7 @@ export const BoxBanner = styled.div<{ mobile: boolean }>`
     p {
       text-align: center;
       font-size: 18px;
-      color: #ffffff;
+      color: ${Colors.fontColorWhite};
     }
 
     button {
@@ -44,7 +44,7 @@ export const BoxBanner = styled.div<{ mobile: boolean }>`
       gap: 5px;
       border-radius: 18px;
       background-color: ${Colors.colorButton};
-      color: #ffffff;
+      color: ${Colors.fontColorWhite};
     }
   }
 `;

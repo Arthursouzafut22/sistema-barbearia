@@ -4,15 +4,16 @@ import { FaRegBuilding } from "react-icons/fa6";
 import { BsStars } from "react-icons/bs";
 import { Colors } from "../../styles/Colors";
 import useMedia from "../../hooks/useMedia";
+import Title from "../Title/Title";
 
 export default function WhyChooseUs() {
   const { mobile } = useMedia("(max-width:767px)");
+  
   return (
     <S.Section>
-      <h1>
+      <Title>
         <span style={{ color: Colors.colorButton }}>POR QUE</span> NOS ESCOLHER?
-      </h1>
-      <span className="details"></span>
+      </Title>
       <S.Box>
         <div className="card">
           <span>

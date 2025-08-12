@@ -42,7 +42,7 @@ export const BoxNav = styled.div`
     font-size: 1rem;
     padding: 6px 0;
     cursor: pointer;
-    color: #ffff;
+    color: ${Colors.fontColorWhite};
     background-color: transparent;
   }
 `;
@@ -52,7 +52,7 @@ export const NavLink = styled(Link)`
   text-decoration: none;
   font-size: 1rem;
   background-color: ${Colors.colorButton};
-  color: #ffffff;
+  color: ${Colors.fontColorWhite};
   padding: 6px 15px;
   border-radius: 15px;
 
@@ -64,6 +64,6 @@ export const NavLink2 = styled(Link)`
   display: block;
   text-decoration: none;
   font-size: 1rem;
-  color: #ffffff;
+  color: ${Colors.fontColorWhite};
   padding: 6px 15px;
 `;

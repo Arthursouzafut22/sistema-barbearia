@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
-export const Spinner = styled.svg`
-    width: 1.35em;
-    transform-origin: center;
-    animation: rotate4 2s linear infinite;
-  
+export const Spinner = styled.svg<{ color: string; width: string}>`
+  width: ${({width}) => width};
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
 
   .loader {
     fill: none;
-    stroke: #fff;
+    stroke: ${({color}) => color};
     stroke-width: 10;
     stroke-dasharray: 2, 200;
     stroke-dashoffset: 0;

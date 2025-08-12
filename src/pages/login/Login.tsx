@@ -55,7 +55,13 @@ const Login = () => {
             {mensagem}
           </p>
         )}
-        <Button marginTop={"10px"}>{spinner ? <Spinner /> : "Entrar"}</Button>
+        <Button marginTop={"10px"}>
+          {spinner ? (
+            <Spinner color={Colors.fontColorWhite} width="1.35em" />
+          ) : (
+            "Entrar"
+          )}
+        </Button>
         <p className={"conta"}>
           Ainda não possui uma conta? <Link to={"/register"}>Registre-se</Link>
         </p>

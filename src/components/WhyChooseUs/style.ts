@@ -2,26 +2,8 @@ import styled from "styled-components";
 import { Colors } from "../../styles/Colors";
 
 export const Section = styled.section`
-  background-color: #ffffff;
+  background-color: ${Colors.fontColorWhite};
   padding: 80px 0;
-
-  h1 {
-    text-align: center;
-    font-size: 36px;
-
-    @media screen and (max-width: 767px) {
-      font-size: 28px;
-    }
-  }
-
-  .details {
-    display: block;
-    height: 5px;
-    width: 80px;
-    background-color: ${Colors.colorButton};
-    margin: 0 auto;
-    margin-top: 12px;
-  }
 `;
 
 export const Box = styled.div`
@@ -68,7 +50,7 @@ export const Box = styled.div`
       height: 80px;
       border-radius: 80px;
       background-color: ${Colors.colorButton};
-      color: #ffffff;
+      color: ${Colors.fontColorWhite};
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
 
