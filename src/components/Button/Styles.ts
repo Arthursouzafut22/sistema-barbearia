@@ -14,6 +14,6 @@ export const Button = styled.button<{ marginTop: string }>`
   padding: 10px;
   height: 39px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 8px;
   margin-top: ${({ marginTop }) => marginTop && marginTop};
 `;

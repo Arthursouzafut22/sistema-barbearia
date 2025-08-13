@@ -40,11 +40,17 @@ export const BoxBanner = styled.div<{ mobile: boolean }>`
       align-items: center;
       font-size: 1rem;
       cursor: pointer;
-      padding: 10px 32px;
+      padding: 10px 38px;
       gap: 5px;
       border-radius: 18px;
       background-color: ${Colors.colorButton};
       color: ${Colors.fontColorWhite};
+      border: none;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: #921eb9;
+      }
     }
   }
 `;

@@ -21,7 +21,6 @@ export const BoxCards = styled.div`
 
 export const Card = styled.div`
   max-width: 350px;
-
   background-color: #27272a;
   flex: 1 1 350px;
   height: 440px;
@@ -114,7 +113,7 @@ export const ButtonPlus = styled.button`
   font-size: 16px;
   padding: 12px 24px;
   border: 2px solid ${Colors.colorButton};
-  border-radius: 18px;
+  border-radius: 8px;
   cursor: pointer;
   background-color: transparent;
   color: ${Colors.colorButton};

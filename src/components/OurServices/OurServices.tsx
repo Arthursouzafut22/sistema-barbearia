@@ -10,12 +10,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function OurServices() {
   const [service, setService] = useState<ServiceProps[]>([]);
-  const [load, setLoad] = useState(true)
+  const [load, setLoad] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
-        setLoad(true)
+      setLoad(true);
       const dados = await getServices();
       setService(dados);
       setLoad(false);
@@ -38,7 +38,9 @@ export default function OurServices() {
               <CardService key={dados.id} dados={dados} />
             ))}
       </S.BoxCards>
-      <S.ButtonPlus onClick={() => navigate("/services")}>VER TODOS OS SERVIÇOS</S.ButtonPlus>
+      <S.ButtonPlus onClick={() => navigate("/services")}>
+        VER TODOS OS SERVIÇOS
+      </S.ButtonPlus>
     </S.Section>
   );
 }

@@ -4,6 +4,7 @@ import Login from "../pages/login/Login";
 import Home from "../pages/home/Home";
 import PrivateRouter from "./PrivateRouter";
 import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 const RoutesProvider = () => {
   return (
@@ -21,6 +22,7 @@ const RoutesProvider = () => {
           }
         />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
