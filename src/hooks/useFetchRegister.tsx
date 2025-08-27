@@ -27,9 +27,14 @@ export const useFetchRegister = () => {
 
       const json = (await resposta.json()) as Iregister;
       setMensagem(json.mensagem);
+
+      setTimeout(() => {
+        setMensagem("");
+      }, 2000);
+
       setSucess(json.sucesso);
+      delayNavigation("/login", json.sucesso);
       setSpinner(false);
-      delayNavigation("/login");
     } catch (erro) {
       console.error("Error ao cadastrar", erro);
     }

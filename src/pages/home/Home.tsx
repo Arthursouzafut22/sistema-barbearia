@@ -23,14 +23,14 @@ export default function Home() {
               Tradição e estilo em cada corte. Uma experiência única de <br />{" "}
               barbearia moderna.
             </p>
-            <button onClick={() => navigate("/agendar")}>
+            <button onClick={() => navigate("/book")}>
               <MdDateRange fontSize={25} /> Agendar
             </button>
           </div>
         </div>
       </S.BoxBanner>
       <WhyChooseUs />
-      <OurServices/>
+      <OurServices />
     </S.Main>
   );
 }

@@ -81,7 +81,7 @@ const Register = () => {
             {sucess}
           </p>
         )}
-        <Button marginTop={"10px"}>
+        <Button marginTop={"10px"} disabled={spinner}>
           {spinner ? (
             <Spinner color={Colors.fontColorWhite} width="1.35em" />
           ) : (

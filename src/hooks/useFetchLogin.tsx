@@ -7,10 +7,12 @@ interface Ilogin {
   id: number;
   token: string;
   mensagem: string;
+  sucesso: string;
 }
 
 export const useFetchLogin = () => {
   const [mensagem, setMensagem] = useState<string>("");
+  const [sucess, setSucess] = useState("");
   const [spinner, setSpinner] = useState(false);
   const { delayNavigation } = useDelayNavigation();
 
@@ -25,11 +27,19 @@ export const useFetchLogin = () => {
 
       const json = (await resposta.json()) as Ilogin;
 
-      localStorage.setItem("id", JSON.stringify(json.id));
-      localStorage.setItem("token", JSON.stringify(json.token));
+      if (json.id !== undefined && json.token !== undefined) {
+        localStorage.setItem("id", JSON.stringify(json.id));
+        localStorage.setItem("token", JSON.stringify(json.token));
+      }
       setMensagem(json?.mensagem);
+
+      setTimeout(() => {
+        setMensagem("");
+      }, 2000);
+
+      setSucess(json.sucesso);
       setSpinner(false);
-      delayNavigation("/");
+      delayNavigation("/", json.sucesso);
     } catch (erro) {
       console.log("Erro ao fazer login", erro);
     }
@@ -39,5 +49,6 @@ export const useFetchLogin = () => {
     loginSubmit,
     mensagem,
     spinner,
+    sucess,
   };
 };

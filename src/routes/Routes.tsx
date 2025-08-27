@@ -2,9 +2,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
 import Home from "../pages/home/Home";
-import PrivateRouter from "./PrivateRouter";
+import PrivateRouter from "../pages/private/PrivateRouter";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
+import Book from "../pages/book/Book";
+import Servicos from "../pages/servicos/servicos";
 
 const RoutesProvider = () => {
   return (
@@ -21,6 +23,8 @@ const RoutesProvider = () => {
             </PrivateRouter>
           }
         />
+        <Route path="/book" element={<Book />} />
+        <Route path="/services" element={<Servicos />} />
       </Routes>
       <Footer />
     </BrowserRouter>

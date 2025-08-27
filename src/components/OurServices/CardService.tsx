@@ -17,7 +17,7 @@ export default function CardService({ dados }: { dados: ServiceProps }) {
         <h1 style={{ color: "#fff" }}>{dados.nome}</h1>
         <strong>{formatPrice(Number(dados.preco.replace(".00", "")))}</strong>
         <p>{dados.descricao}</p>
-        <button onClick={() => navigate("/agendar")}>Agendar</button>
+        <button onClick={() => navigate("/book")}>Agendar</button>
       </S.WrapperCard>
     </S.Card>
   );

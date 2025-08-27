@@ -1,26 +1,14 @@
 import { Colors } from "../../styles/Colors";
 import Title from "../Title/Title";
 import * as S from "./styles";
-import { getServices } from "../../services/getServices";
-import { useEffect, useState } from "react";
-import { ServiceProps } from "../../services/getServices";
 import CardService from "./CardService";
 import { Spinner } from "../Spinner/Spinner";
 import { useNavigate } from "react-router-dom";
+import { ServiceProps, useFetchServices } from "../../hooks/useFetchServices";
 
 export default function OurServices() {
-  const [service, setService] = useState<ServiceProps[]>([]);
-  const [load, setLoad] = useState(true);
+  const { service, load } = useFetchServices();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    (async () => {
-      setLoad(true);
-      const dados = await getServices();
-      setService(dados);
-      setLoad(false);
-    })();
-  }, []);
 
   return (
     <S.Section>
@@ -30,7 +18,7 @@ export default function OurServices() {
       </Title>
 
       <S.BoxCards>
-        {load && <Spinner color={Colors.colorButton} width="2.35em" />}
+        {load && <Spinner />}
         {service &&
           service
             .slice(0, 4)
@@ -38,7 +26,10 @@ export default function OurServices() {
               <CardService key={dados.id} dados={dados} />
             ))}
       </S.BoxCards>
-      <S.ButtonPlus onClick={() => navigate("/services")}>
+      <S.ButtonPlus
+        style={{ visibility: load ? "hidden" : "initial" }}
+        onClick={() => navigate("/services")}
+      >
         VER TODOS OS SERVIÇOS
       </S.ButtonPlus>
     </S.Section>

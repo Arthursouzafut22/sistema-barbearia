@@ -23,10 +23,14 @@ export const GlobalStyles = createGlobalStyle`
 }
 }
 
+#root{
+  display: flex;
+  flex-direction: column;
+}
+
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: ${Colors.CharcoalBlack};
-
 }
 
 body * {

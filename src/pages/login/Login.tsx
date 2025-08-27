@@ -14,7 +14,7 @@ import { Spinner } from "../../components/Spinner/Spinner";
 
 const Login = () => {
   const [password, setPassword] = useState(false);
-  const { loginSubmit, mensagem, spinner } = useFetchLogin();
+  const { loginSubmit, mensagem, spinner, sucess } = useFetchLogin();
   const { register, handleSubmit } = useForm<ILogin>({
     resolver: yupResolver(Schema),
   });
@@ -48,11 +48,16 @@ const Login = () => {
             onClick={() => setPassword((p) => !p)}
           />
         </fieldset>
-        {mensagem.length > 0 && (
+        {mensagem?.length > 0 && (
+          <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>
+            {mensagem}
+          </p>
+        )}
+        {sucess?.length > 0 && (
           <p
             style={{ color: "#4caf50", fontSize: "14px", textAlign: "center" }}
           >
-            {mensagem}
+            {sucess}
           </p>
         )}
         <Button marginTop={"10px"}>

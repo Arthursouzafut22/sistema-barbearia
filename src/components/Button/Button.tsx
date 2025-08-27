@@ -1,15 +1,14 @@
 import { ReactNode } from "react";
 import * as S from "./Styles";
 
-interface IButton {
+type ButtonProps = React.ComponentProps<"button"> & {
   children: string | ReactNode;
   marginTop: string;
-  onClick?: VoidFunction;
-}
+};
 
-const Button = ({ children, marginTop, onClick }: IButton) => {
+const Button = ({ children, marginTop, ...rest }: ButtonProps) => {
   return (
-    <S.Button marginTop={marginTop} onClick={onClick}>
+    <S.Button marginTop={marginTop} {...rest}>
       {children}
     </S.Button>
   );
