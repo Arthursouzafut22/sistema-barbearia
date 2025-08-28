@@ -5,3 +5,7 @@ export function formatPrice(price: number) {
   });
   return format;
 }
+
+export function scrollTop() {
+  return window.scrollTo({ behavior: "smooth", top: 0 });
+}

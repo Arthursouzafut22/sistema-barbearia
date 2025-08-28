@@ -13,17 +13,17 @@ export default function OurServices() {
   return (
     <S.Section>
       <Title>
-        <span style={{ color: Colors.fontColorWhite }}>NOSSOS</span>{" "}
-        <span style={{ color: Colors.colorButton }}>SERVIÇOS</span>
+        <span style={{ color: Colors?.fontColorWhite }}>NOSSOS</span>{" "}
+        <span style={{ color: Colors?.colorButton }}>SERVIÇOS</span>
       </Title>
 
       <S.BoxCards>
-        {load && <Spinner />}
+        {load && <Spinner color={Colors?.colorButton} width="60px" />}
         {service &&
           service
             .slice(0, 4)
             .map((dados: ServiceProps) => (
-              <CardService key={dados.id} dados={dados} />
+              <CardService key={dados?.id} dados={dados} />
             ))}
       </S.BoxCards>
       <S.ButtonPlus

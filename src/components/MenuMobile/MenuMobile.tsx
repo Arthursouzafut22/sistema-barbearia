@@ -19,15 +19,24 @@ function MenuMobile({ closeMenu }: { closeMenu: () => void }) {
       </S.NavLink>
       <S.NavLink
         onClick={closeMenu}
+        to={"/agendamentos"}
+        background={"transparente"}
+        color={"#fff"}
+      >
+        Meus agendamentos
+      </S.NavLink>
+      <S.NavLink
+        onClick={closeMenu}
         to={"/services"}
         background={"transparente"}
         color={"#fff"}
       >
         Serviços
       </S.NavLink>
+
       <button
         onClick={() => {
-          navigate("/perfil");
+          navigate("/profile");
           closeMenu();
         }}
       >

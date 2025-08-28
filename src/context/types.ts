@@ -1,5 +1,6 @@
 export interface Ilogin {
   user: Iuser | null;
+  logout: () => void;
 }
 
 export interface Iuser {

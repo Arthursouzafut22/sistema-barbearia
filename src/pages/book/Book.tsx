@@ -1,9 +1,9 @@
 import * as S from "./style";
 import Input from "../../components/Input/Input";
 import { ServiceProps, useFetchServices } from "../../hooks/useFetchServices";
-import { formatPrice } from "../../utils/utils";
+import { formatPrice, scrollTop } from "../../utils/utils";
 import { Spinner } from "../../components/Spinner/styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../components/Button/Styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -40,6 +40,10 @@ export default function Book() {
     setTime(time);
     setIndexButton((prev) => ({ ...prev, indexTime: index }));
   }
+
+  useEffect(() => {
+    scrollTop();
+  }, []);
 
   return (
     <S.Section>
@@ -80,7 +84,7 @@ export default function Book() {
 
           {loading ? (
             <S.BoxLoading>
-              <Spinner />
+              <Spinner color={Colors.colorButton} width="50px" />
               <p>Carregando horários...</p>
             </S.BoxLoading>
           ) : (
@@ -107,7 +111,9 @@ export default function Book() {
 
         <S.Box3>
           <h2>Escolha o Serviço</h2>
-          <div className={"load"}>{load && <Spinner />}</div>
+          <div className={"load"}>
+            {load && <Spinner color={Colors.colorButton} width="50px" />}
+          </div>
           {service &&
             service.map((item: ServiceProps, index) => (
               <S.DivButton

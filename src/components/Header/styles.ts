@@ -21,6 +21,7 @@ export const Nav = styled.nav<{ mobile: boolean }>`
   padding: 0 15px;
   gap: 10px;
   width: ${({ mobile }) => mobile && "100%"};
+  position: relative;
 
   @media screen and (max-width: 467px) {
     padding: 0 10px;

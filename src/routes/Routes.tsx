@@ -6,7 +6,9 @@ import PrivateRouter from "../pages/private/PrivateRouter";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Book from "../pages/book/Book";
-import Servicos from "../pages/servicos/servicos";
+import Servicos from "../pages/servicos/Servicos";
+import Profile from "../pages/profile/Profile";
+import Appointments from "../pages/appointments/Appointments";
 
 const RoutesProvider = () => {
   return (
@@ -25,6 +27,8 @@ const RoutesProvider = () => {
         />
         <Route path="/book" element={<Book />} />
         <Route path="/services" element={<Servicos />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/agendamentos" element={<Appointments />} />
       </Routes>
       <Footer />
     </BrowserRouter>

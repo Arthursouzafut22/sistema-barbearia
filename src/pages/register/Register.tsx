@@ -16,7 +16,11 @@ const Register = () => {
   const [password, setPassword] = useState(false);
   const { registerSubmit, mensagem, sucess, spinner } = useFetchRegister();
   const [confirmPassword, setConfirmPassword] = useState(false);
-  const { register, handleSubmit } = useForm<IForm>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IForm>({
     resolver: yupResolver(Schema),
   });
 
@@ -47,7 +51,7 @@ const Register = () => {
         </fieldset>
         <fieldset>
           <Input
-            {...register("Senha", { required: true })}
+            {...register("Senha", { required: true, min: 8 })}
             label="Senha"
             name={"Senha"}
             type={password ? "text" : "password"}
@@ -59,7 +63,7 @@ const Register = () => {
         </fieldset>
         <fieldset>
           <Input
-            {...register("Confirme a senha", { required: true })}
+            {...register("Confirme a senha", { required: true, minLength: 8 })}
             label="Confirme a senha"
             name={"Confirme a senha"}
             type={confirmPassword ? "text" : "password"}
@@ -81,9 +85,20 @@ const Register = () => {
             {sucess}
           </p>
         )}
+        {errors.Senha && (
+          <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>
+            {errors.Senha?.message}
+          </p>
+        )}
+        {!errors.Senha && errors["Confirme a senha"] && (
+          <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>
+            {errors["Confirme a senha"].message}
+          </p>
+        )}
+
         <Button marginTop={"10px"} disabled={spinner}>
           {spinner ? (
-            <Spinner color={Colors.fontColorWhite} width="1.35em" />
+            <Spinner color={Colors.fontColorWhite} width="40px" />
           ) : (
             "Criar conta"
           )}

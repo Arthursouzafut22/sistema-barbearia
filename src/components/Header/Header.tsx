@@ -1,18 +1,23 @@
 import * as S from "./styles";
 import { FaRegUserCircle } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Colors } from "../../styles/Colors";
 import useMedia from "../../hooks/useMedia";
 import MenuMobile from "../MenuMobile/MenuMobile";
 import { useCallback, useState } from "react";
+import Dropdown from "../Dropdown/Dropdown";
 
 export default function Header() {
-  const navigate = useNavigate();
   const { mobile } = useMedia("(max-width:767px)");
   const [menuActive, setMenuActive] = useState(false);
+  const [activeDropDown, setActiveDropDown] = useState(false);
 
   const closeMenu = useCallback(() => {
     setMenuActive(false);
+  }, []);
+
+  const closeDropDown = useCallback(() => {
+    setActiveDropDown(false);
   }, []);
 
   return (
@@ -37,12 +42,15 @@ export default function Header() {
             <>
               <S.NavLink to={"/book"}>Agendar agora</S.NavLink>
               <S.NavLink2 to={"/services"}>Serviços</S.NavLink2>
-              <button onClick={() => navigate("/perfil")}>
+              <button onClick={() => setActiveDropDown((prev) => !prev)}>
                 <FaRegUserCircle fontSize={28} />
               </button>
             </>
           )}
         </S.BoxNav>
+        {!mobile && activeDropDown && (
+          <Dropdown closeDropDown={closeDropDown} />
+        )}
       </S.Nav>
       {mobile && menuActive && <MenuMobile closeMenu={closeMenu} />}
     </S.Header>

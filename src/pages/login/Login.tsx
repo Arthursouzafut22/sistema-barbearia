@@ -62,7 +62,7 @@ const Login = () => {
         )}
         <Button marginTop={"10px"}>
           {spinner ? (
-            <Spinner color={Colors.fontColorWhite} width="1.35em" />
+            <Spinner color={Colors.fontColorWhite} width="40px" />
           ) : (
             "Entrar"
           )}

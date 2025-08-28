@@ -36,12 +36,13 @@ export const UseContextLogin = ({ children }: PropsWithChildren) => {
         const response = await fetch(URL + `/user/${id}`, {
           method: "GET",
           headers: {
-            "Content-type": "Application/json",
+            "Content-type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
 
         const json = await response.json();
+        console.log(json);
         setUser({
           id: json.rows[0].id,
           nome: json.rows[0].nome,
@@ -54,7 +55,15 @@ export const UseContextLogin = ({ children }: PropsWithChildren) => {
     getUser();
   }, [id, token]);
 
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    window.location.href = "/";
+  }
+
   return (
-    <ContextLogin.Provider value={{ user }}>{children}</ContextLogin.Provider>
+    <ContextLogin.Provider value={{ user, logout }}>
+      {children}
+    </ContextLogin.Provider>
   );
 };

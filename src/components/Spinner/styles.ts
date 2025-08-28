@@ -16,10 +16,11 @@ const l3 = keyframes`
   }
 `;
 
-export const Spinner = styled.div`
-  width: 60px;
+export const Spinner = styled.div<{ color: string; width: string }>`
+  width: ${({ width }) => width};
   aspect-ratio: 2;
-  --_g: no-repeat radial-gradient(circle closest-side, #bf2ef0 90%, #0000);
+  --_g: no-repeat
+    radial-gradient(circle closest-side, ${({ color }) => color} 90%, #0000);
   background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
   background-size: calc(100% / 3) 50%;
   animation: ${l3} 1s infinite linear;
