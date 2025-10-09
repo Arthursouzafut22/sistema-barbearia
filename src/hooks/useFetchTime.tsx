@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { URL_BASE } from "../services/urls";
+import { URL_BASE } from "../services/urls";
 
 interface ITimes {
   horariosDisponiveis: string[];
@@ -15,7 +15,7 @@ export const useFetchTime = () => {
       try {
         setLoading(true);
         const res = await fetch(
-          `http://localhost:3005/horarios-disponiveis?data=${date}`
+          `${URL_BASE}/horarios-disponiveis?data=${date}`
         );
 
         if (!res.ok)
@@ -23,7 +23,7 @@ export const useFetchTime = () => {
 
         const json = (await res.json()) as ITimes;
         setTimes(json.horariosDisponiveis);
-        setLoading(true);
+        setLoading(false);
       } catch (error: unknown) {
         console.error("Error em buscar horários", error);
       } finally {

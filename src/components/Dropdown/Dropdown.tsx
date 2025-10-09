@@ -9,7 +9,7 @@ function Dropdown({ closeDropDown }: { closeDropDown: () => void }) {
   const { logout } = AuthLogin();
 
   return (
-    <S.MenuDropdown>
+    <S.MenuDropdown onClick={(e) => e.stopPropagation()}>
       <button
         onClick={() => {
           navigate("/profile");

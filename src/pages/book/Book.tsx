@@ -131,7 +131,7 @@ export default function Book() {
             ))}
         </S.Box3>
         <Button marginTop="30px" style={{ padding: "25px 0px" }}>
-          Escolher Pagamento
+          Agendar
         </Button>
       </S.FormBook>
     </S.Section>

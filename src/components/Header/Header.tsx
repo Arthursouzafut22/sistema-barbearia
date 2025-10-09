@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Colors } from "../../styles/Colors";
 import useMedia from "../../hooks/useMedia";
 import MenuMobile from "../MenuMobile/MenuMobile";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Dropdown from "../Dropdown/Dropdown";
 
 export default function Header() {
@@ -18,6 +18,16 @@ export default function Header() {
 
   const closeDropDown = useCallback(() => {
     setActiveDropDown(false);
+  }, []);
+
+  useEffect(() => {
+    const fecharDrop = () => setActiveDropDown(false);
+    
+    document.body.addEventListener("click", fecharDrop);
+
+    return () => {
+      document.body.removeEventListener("click", fecharDrop);
+    };
   }, []);
 
   return (
@@ -42,7 +52,12 @@ export default function Header() {
             <>
               <S.NavLink to={"/book"}>Agendar agora</S.NavLink>
               <S.NavLink2 to={"/services"}>Serviços</S.NavLink2>
-              <button onClick={() => setActiveDropDown((prev) => !prev)}>
+              <button
+                onClick={(e) => {
+                  setActiveDropDown((prev) => !prev);
+                  e.stopPropagation();
+                }}
+              >
                 <FaRegUserCircle fontSize={28} />
               </button>
             </>

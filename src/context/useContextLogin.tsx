@@ -26,7 +26,7 @@ export const UseContextLogin = ({ children }: PropsWithChildren) => {
     const getToken = localStorage.getItem("token");
     return getToken ? JSON.parse(getToken) : null;
   });
-  const [user, setUser] = useState<Iuser | null>(null);
+  const [user, setUser] = useState<Iuser>({} as Iuser);
 
   useEffect(() => {
     if (id === null || token === null) return;
@@ -42,7 +42,7 @@ export const UseContextLogin = ({ children }: PropsWithChildren) => {
         });
 
         const json = await response.json();
-        console.log(json);
+      
         setUser({
           id: json.rows[0].id,
           nome: json.rows[0].nome,

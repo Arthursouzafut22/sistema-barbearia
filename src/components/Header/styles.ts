@@ -83,30 +83,28 @@ export const ButtonMobile = styled.button<{ menuActive: boolean }>`
   gap: 5px;
   touch-action: manipulation;
   cursor: pointer;
-  /* border: 1px solid wheat; */
- /* padding: 5px !important; */
-
-
-  /* & :nth-child(2) {
-    display: ${({ menuActive }) => menuActive && "none"};
-  } */
 
   div {
     width: 25px;
     height: 3px;
     background-color: ${Colors.colorButton};
-    /* position: ${({ menuActive }) => menuActive && "absolute"}; */
-    /* transform-origin: center; */
-    transition: 0.3s;
+    transition: all 0.3s ease;
+  }
 
-    /* &:first-child {
-      transform: ${({ menuActive }) =>
-        menuActive && "transform: rotate(45deg)"};
-    }
-    &:last-child {
-      transform: ${({ menuActive }) =>
-        menuActive && "transform: rotate(-45deg)"};
-    } */
+  div:nth-child(1) {
+    transform: ${({ menuActive }) =>
+      menuActive ? "rotate(45deg) translate(5.2px, 5.2px)" : "rotate(0)"};
+  }
+
+  div:nth-child(2) {
+    opacity: ${({ menuActive }) => (menuActive ? 0 : 1)};
+    transform: ${({ menuActive }) =>
+      menuActive ? "translateX(-20px)" : "translateX(0)"};
+  }
+
+  div:nth-child(3) {
+    transform: ${({ menuActive }) =>
+      menuActive ? "rotate(-45deg) translate(6px, -6px)" : "rotate(0)"};
   }
 `;
 
