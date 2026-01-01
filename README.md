@@ -1,54 +1,30 @@
-# React + TypeScript + Vite
+<img width="1919" height="911" alt="Captura de tela 2026-01-01 160146" src="https://github.com/user-attachments/assets/0a3b37ef-e75a-4e89-95e7-0fa42bf119a4" />
+<img width="1919" height="893" alt="Captura de tela 2026-01-01 160225" src="https://github.com/user-attachments/assets/2a5c220c-801a-4af5-9903-0d08e88bbda6" />
+<img width="1918" height="897" alt="Captura de tela 2026-01-01 160332" src="https://github.com/user-attachments/assets/74a5add8-8a19-4193-bef2-149a20f4c702" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## 🧔💈 Sistema de Agendamentos para Barbearia
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este projeto é um sistema de agendamento online para barbearias, onde o cliente consegue selecionar um serviço, escolher data e horário e registrar o pedido diretamente pela aplicação.
 
-## Expanding the ESLint configuration
+O diferencial do sistema é a integração com o Telegram Bot: todos os agendamentos realizados pelos clientes são enviados automaticamente para o dono da barbearia via Telegram. O barbeiro pode aceitar ou recusar o agendamento diretamente no bot, e a decisão é registrada no sistema.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Tecnologias utilizadas
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+React.JS - Frontend                                                        
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Node.JS - Backend                                                               
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+postgresql - Bnaco de Dados                                                                  
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## ✨ Funcionalidades                                                                   
+
+Agendamento de serviços pelo cliente                          
+
+Notificação automática via Telegram Bot                                      
+
+Aprovação ou recusa do agendamento pelo barbeiro                                                                                 
+
+Registro do status do agendamento (pendente, aceito, recusado)                                                                  
+
+Associação do agendamento ao cliente                                                                                 
