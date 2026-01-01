@@ -15,7 +15,7 @@ React.JS - Frontend
 
 Node.JS - Backend                                                               
 
-postgresql - Bnaco de Dados                                                                  
+postgresql - Banco de Dados                                                                  
 
 ## ✨ Funcionalidades                                                                   
 
