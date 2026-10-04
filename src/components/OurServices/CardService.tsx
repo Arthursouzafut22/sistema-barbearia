@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { ServiceProps } from "../../services/getServices";
 import { URL_BASE } from "../../services/urls";
 import * as S from "./styles";
 import { formatPrice } from "../../utils/utils";
+import { ServiceProps } from "../../hooks/useFetchServices";
 
 export default function CardService({ dados }: { dados: ServiceProps }) {
   const navigate = useNavigate();

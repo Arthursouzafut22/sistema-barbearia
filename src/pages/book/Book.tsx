@@ -13,10 +13,11 @@ import { useFetchReserve } from "../../hooks/useFetchReserve";
 import { IBook, IndexProps } from "./types";
 import { Colors } from "../../styles/Colors";
 
+
 export default function Book() {
   const { service, load } = useFetchServices();
   const { date, setDate, times, loading } = useFetchTime();
-  const { setServico, createBook } = useFetchReserve();
+  const { setServico, createBook, spinner } = useFetchReserve();
   const [time, setTime] = useState("");
   const [indexButton, setIndexButton] = useState<IndexProps>({
     indexService: undefined,
@@ -31,14 +32,14 @@ export default function Book() {
     index: number
   ) {
     const servico = event.currentTarget?.firstChild?.textContent;
-    setServico(servico);
     setIndexButton((prev) => ({ ...prev, indexService: index }));
+    setServico(servico);
   }
 
   function selectTime(event: React.MouseEvent<HTMLDivElement>, index: number) {
     const time = event.currentTarget?.textContent;
-    setTime(time);
     setIndexButton((prev) => ({ ...prev, indexTime: index }));
+    setTime(time);
   }
 
   useEffect(() => {
@@ -130,8 +131,16 @@ export default function Book() {
               </S.DivButton>
             ))}
         </S.Box3>
-        <Button marginTop="30px" style={{ padding: "25px 0px" }}>
-          Agendar
+        <Button
+          marginTop="30px"
+          style={{
+            padding: "25px 0px",
+            opacity: spinner ? 0.5 : "initial",
+            cursor: spinner ? "not-allowed" : "pointer",
+          }}
+          disabled={spinner}
+        >
+          {spinner ? <Spinner color="#ffffff" width="32px"/> : "Agendar"}
         </Button>
       </S.FormBook>
     </S.Section>

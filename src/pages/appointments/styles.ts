@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Colors } from "../../styles/Colors";
 
 export const Section = styled.section<{ load: boolean; columns: boolean }>`
-  height: ${({ load, columns }) => (load || columns) && "90vh"};
+  /* height: ${({ load, columns }) => (load || columns) && "90vh"}; */
 
   @media screen and (max-width: 767px) {
     h1 {
@@ -43,11 +43,14 @@ export const CardAgendamento = styled.div`
   background-color: aliceblue;
   border-radius: 10px;
   background-color: #27272a;
+  max-width: 502px;
+  min-height: 160px;
 
   .box-button {
     align-items: center;
-    justify-content: end;
+    justify-content: space-between;
     display: flex;
+
   }
   @media screen and (max-width: 816px) {
     p {
@@ -60,7 +63,7 @@ export const CardAgendamento = styled.div`
     color: ${Colors.fontColorWhite};
   }
 
-  button {
+  .btn_cancel {
     font-size: 15px;
     display: block;
     cursor: pointer;
@@ -76,4 +79,17 @@ export const CardAgendamento = styled.div`
       background-color: #921eb9;
     }
   }
+`;
+
+export const Status = styled.span`
+  /* display: block; */
+  padding: 6px 12px;
+  margin: 0;
+  border-radius: 6px;
+  line-height: 1; 
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
 `;

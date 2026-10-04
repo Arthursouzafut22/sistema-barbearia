@@ -1,69 +1,121 @@
 import {
-  useContext,
   createContext,
-  PropsWithChildren,
-  useState,
+  useCallback,
+  useContext,
   useEffect,
+  useMemo,
+  useState,
+  type PropsWithChildren,
 } from "react";
-import { Ilogin, Iuser } from "./types";
+import type { Ilogin, Iuser } from "./types";
 import { URL } from "../services/urls";
 
-const ContextLogin = createContext<Ilogin | null>({} as Ilogin);
+const AuthContext = createContext<Ilogin | null>(null);
 
-export const AuthLogin = () => {
-  const context = useContext(ContextLogin);
-
-  if (!context) throw new TypeError("Erro no contexto de login!");
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth deve ser usado dentro de <AuthProvider>");
+  }
   return context;
-};
+}
 
-export const UseContextLogin = ({ children }: PropsWithChildren) => {
-  const [id] = useState(() => {
-    const getId = localStorage.getItem("id");
-    return getId ? JSON.parse(getId) : null;
-  });
-  const [token] = useState(() => {
-    const getToken = localStorage.getItem("token");
-    return getToken ? JSON.parse(getToken) : null;
-  });
-  const [user, setUser] = useState<Iuser>({} as Iuser);
+function readStorage<T>(key: string): T | null {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : null;
+  } catch {
+    return null;
+  }
+}
+
+type Session = { id: string | number | null; token: string | null };
+
+export function AuthProvider({ children }: PropsWithChildren) {
+  const [session, setSession] = useState<Session>(() => ({
+    id: readStorage("id"),
+    token: readStorage("token"),
+  }));
+  const [user, setUser] = useState<Iuser | null>(null);
+  const [isLoading, setIsLoading] = useState(
+    () => session.id !== null && session.token !== null
+  );
+  const [error, setError] = useState<string | null>(null);
+
+  const login = useCallback((id: string | number, token: string) => {
+    localStorage.setItem("id", JSON.stringify(id));
+    localStorage.setItem("token", JSON.stringify(token));
+    setSession({ id, token });
+  }, []);
+
+  const logout = useCallback(() => {
+    localStorage.removeItem("id");
+    localStorage.removeItem("token");
+    setSession({ id: null, token: null });
+    setUser(null);
+  }, []);
 
   useEffect(() => {
-    if (id === null || token === null) return;
+    const { id, token } = session;
 
-    async function getUser() {
+    if (id === null || token === null) {
+      setUser(null);
+      setIsLoading(false);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    async function fetchUser() {
+      setIsLoading(true);
+      setError(null);
+
       try {
-        const response = await fetch(URL + `/user/${id}`, {
-          method: "GET",
+        const response = await fetch(`${URL}/user/${id}`, {
           headers: {
-            "Content-type": "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          signal: controller.signal,
         });
+
+        if (response.status === 401) {
+          logout();
+          return;
+        }
+        if (!response.ok) {
+          throw new Error(`Falha ao buscar usuário (${response.status})`);
+        }
 
         const json = await response.json();
-      
-        setUser({
-          id: json.rows[0].id,
-          nome: json.rows[0].nome,
-          email: json.rows[0].email,
-        });
-      } catch (erro) {
-        console.error(erro);
+        const row = json.rows?.[0];
+        if (!row) throw new Error("Usuário não encontrado");
+
+        setUser({ id: row.id, nome: row.nome, email: row.email });
+      } catch (err) {
+        if (controller.signal.aborted) return;
+        console.error(err);
+        setError(err instanceof Error ? err.message : "Erro desconhecido");
+      } finally {
+        if (!controller.signal.aborted) setIsLoading(false);
       }
     }
-    getUser();
-  }, [id, token]);
 
-  function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    window.location.href = "/";
-  }
+    fetchUser();
+    return () => controller.abort();
+  }, [session, logout]);
 
-  return (
-    <ContextLogin.Provider value={{ user, logout }}>
-      {children}
-    </ContextLogin.Provider>
+  const value = useMemo<Ilogin>(
+    () => ({
+      user,
+      isAuthenticated: user !== null,
+      isLoading,
+      error,
+      login,
+      logout,
+    }),
+    [user, isLoading, error, login, logout]
   );
-};
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}

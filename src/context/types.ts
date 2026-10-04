@@ -1,16 +1,14 @@
-export interface Ilogin {
-  user: Iuser | null;
-  logout: () => void;
-}
-
 export interface Iuser {
   id: number;
-  email: string;
   nome: string;
+  email: string;
 }
 
-export interface InfoUser {
-  id: number | null;
-  email: string | null;
-  token: string | null;
+export interface Ilogin {
+  user: Iuser | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+  login: (id: string | number, token: string) => void;
+  logout: () => void;
 }

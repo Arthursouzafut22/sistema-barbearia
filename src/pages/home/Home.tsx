@@ -9,8 +9,6 @@ export default function Home() {
   const { mobile } = useMedia("(max-width:767px)");
   const navigate = useNavigate();
 
-  
-
   return (
     <S.Main>
       <S.BoxBanner mobile={mobile}>

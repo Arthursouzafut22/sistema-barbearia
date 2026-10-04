@@ -6,6 +6,13 @@ export interface IAppointmentsProps {
   servico: string;
   telefone: string;
   usuario_id: number;
+  status: Status;
+}
+
+enum Status {
+  PENDENTE = "pendente",
+  ACEITO = "aceito",
+  RECUSADO = "recusado",
 }
 
 export interface IAppointments {

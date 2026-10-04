@@ -7,6 +7,13 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 
 ::-webkit-scrollbar {
@@ -21,6 +28,11 @@ export const GlobalStyles = createGlobalStyle`
   background-color: ${Colors.colorButton};
   border-radius: 4px;
 }
+
+#root {
+  /* background-color: red !important; */
+    
+
 }
 
 body{
@@ -30,6 +42,8 @@ body{
 
 body * {
      font-family: "Inter", sans-serif;
+   
+       
 }
 
 label{

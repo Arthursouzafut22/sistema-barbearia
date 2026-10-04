@@ -22,7 +22,7 @@ export default function Header() {
 
   useEffect(() => {
     const fecharDrop = () => setActiveDropDown(false);
-    
+
     document.body.addEventListener("click", fecharDrop);
 
     return () => {

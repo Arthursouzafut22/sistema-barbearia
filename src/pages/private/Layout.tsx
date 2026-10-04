@@ -12,9 +12,25 @@ export function Layout({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <Header />
-      {children}
-      <Footer />
+      {/* <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+        }}
+      > */}
+        <Header />
+        {/* <div
+          style={{
+            flexGrow: 1, // <- mantém o footer no fim
+            display: "flex", // <- garante layout
+            flexDirection: "column",
+          }}
+        > */}
+          {children}
+        {/* </div> */}
+        <Footer />
+      {/* </div> */}
     </>
   );
 }

@@ -4,13 +4,19 @@ import { IAppointments, IAppointmentsProps } from "./types";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { Colors } from "../../styles/Colors";
 import { URL_BASE } from "../../services/urls";
+import { useFetchDeleteBooking } from "../../hooks/useFetchDeleteBooking";
+import { DeleteConfirmModal } from "../../components/DeleteConfirmModal/DeleteConfirmModal";
 
 export default function Appointments() {
   const [agendamentos, setAgendamentos] = useState<IAppointmentsProps[]>([]);
+  const { spinner, deleteBooking } = useFetchDeleteBooking();
+  const [id, setId] = useState<number | null>(null);
   const [load, setLoad] = useState(false);
+  const [open, setOpen] = useState(false);
 
   React.useEffect(() => {
     const user_id = localStorage.getItem("id");
+
     if (!user_id) return;
 
     (async () => {
@@ -25,7 +31,7 @@ export default function Appointments() {
         setAgendamentos(json.meus_agendamentos);
         setLoad(false);
       } catch (error: unknown) {
-        console.log("Error em buscar agendamentos.", error);
+        console.error("Error em buscar agendamentos.", error);
         throw new Error("Erro interno em buscar agendamentos");
       }
     })();
@@ -54,10 +60,54 @@ export default function Appointments() {
                 <strong>data:</strong> {item?.data.slice(0, 10)}
               </p>
               <div className="box-button">
-                <button onClick={() => []}>
+                <div>
+                  <S.Status
+                    style={{
+                      fontSize: "14px",
+                      color:
+                        item.status == "pendente"
+                          ? " #B45309"
+                          : item.status == "aceito"
+                          ? "#15803D"
+                          : item.status == "recusado"
+                          ? "#991B1B"
+                          : "",
+                      background:
+                        item.status == "pendente"
+                          ? "rgba(245, 158, 11, 0.15)"
+                          : item.status == "aceito"
+                          ? "rgba(34, 197, 94, 0.15)"
+                          : item.status == "recusado"
+                          ? "rgba(239, 68, 68, 0.15)"
+                          : "",
+                    }}
+                  >
+                    {item.status === "pendente" && "Agendamento Pendente"}
+                    {item.status === "aceito" && "Agendamento Aceito"}
+                    {item.status === "recusado" && "Agendamento Recusado"}
+                  </S.Status>
+                </div>
+                <button
+                  className="btn_cancel"
+                  onClick={() => {
+                    setOpen(true);
+                    setId(item.id);
+                  }}
+                >
                   Cancelar
                 </button>
               </div>
+              {open && (
+                <DeleteConfirmModal
+                  onConfirm={async () => {
+                    await deleteBooking(id as number, setAgendamentos);
+                    setOpen(false);
+                  }}
+                  open={open}
+                  spinner={spinner}
+                  setOpen={setOpen}
+                />
+              )}
             </S.CardAgendamento>
           ))
         )}
